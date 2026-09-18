@@ -1,0 +1,25 @@
+# Автопубликация сайта «Колобок» на Cloudflare Pages при каждом push в main.
+# Как включить: переименуйте файл в .github/workflows/deploy.yml и добавьте секреты
+# CLOUDFLARE_API_TOKEN и CLOUDFLARE_ACCOUNT_ID (Settings → Secrets → Actions).
+name: Deploy to Cloudflare Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Публикация сайта
+    steps:
+      - uses: actions/checkout@v4
+      - name: Сборка сайта из исходников
+        run: python3 build_site.py
+      - name: Деплой на Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site --project-name=kolobok-udomlya

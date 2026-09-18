@@ -1,0 +1,11 @@
+# служебное
+.DS_Store
+Thumbs.db
+node_modules/
+build/node_modules/
+build/.npm/
+__pycache__/
+*.pyc
+# временные
+*.log
+/tmp/

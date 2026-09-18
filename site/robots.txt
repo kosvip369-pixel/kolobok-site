@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kolobok-udomlya.pages.dev/sitemap.xml
