@@ -13,6 +13,22 @@
 
 ---
 
+## 🌐 Живые адреса сайта
+
+| Адрес | Что это | Как обновляется |
+|---|---|---|
+| **https://kosvip369-pixel.github.io/kolobok-site/** | сайт уже работает (GitHub Pages, ветка `gh-pages`) | ветка `gh-pages` |
+| **https://github.com/kosvip369-pixel/kolobok-site** | репозиторий: исходники + готовый сайт | `git push` / правки через сайт GitHub |
+| `https://kolobok-udomlya.pages.dev` *(после подключения)* | основной адрес на Cloudflare Pages | автодеплой из репозитория |
+
+Каждая правка исходников: `python3 build_site.py` → `git add -A && git commit -m "правки" && git push`.
+Для публикации обновлений на GitHub Pages: `git subtree push --prefix site origin gh-pages` (или пересобрать ветку `gh-pages` из папки `site`).
+
+Перед публикацией на своём домене пересоберите сайт под него, чтобы canonical/sitemap были верными:
+```bash
+SITE_DOMAIN=https://ваш-домен.ru python3 build_site.py
+```
+
 ## 1. Что удалось найти по заведению
 
 | Данные | Значение | Источник |
