@@ -1,0 +1,43 @@
+# Автопубликация сайта «Колобок» на Cloudflare Pages.
+# Пока не добавлены секреты — сборка проходит «зелёной» с подсказкой, сайт не публикуется.
+# Нужны: Settings → Secrets and variables → Actions →
+#   CLOUDFLARE_API_TOKEN (право: Cloudflare Pages — Edit)
+#   CLOUDFLARE_ACCOUNT_ID
+name: Deploy to Cloudflare Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверка настроек Cloudflare
+        id: cfg
+        run: |
+          if [ -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] && [ -n "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
+            echo "ready=true" >> $GITHUB_OUTPUT
+          else
+            echo "ready=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Сборка сайта из исходников
+        run: python3 build_site.py
+
+      - name: Публикация на Cloudflare Pages
+        if: steps.cfg.outputs.ready == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site --project-name=kolobok-udomlya
+
+      - name: Подсказка, если секреты ещё не добавлены
+        if: steps.cfg.outputs.ready != 'true'
+        run: |
+          echo "::warning::Сайт пока не опубликован. Добавьте секреты CLOUDFLARE_API_TOKEN и CLOUDFLARE_ACCOUNT_ID (Settings → Secrets and variables → Actions). Инструкция — в DEPLOY.md"

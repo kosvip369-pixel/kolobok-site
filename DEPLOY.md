@@ -60,7 +60,8 @@ npx wrangler pages deploy site --project-name=kolobok-udomlya
 
 ## Вариант C — автодеплой из GitHub Actions (если не хотите подключать Git в дашборде)
 
-1. Скопируйте файл `deploy-examples/github-workflow-cloudflare.yml` в `.github/workflows/deploy.yml`.
+1. Создайте в репозитории файл `.github/workflows/deploy.yml` и вставьте в него содержимое `deploy-examples/cloudflare-pages-workflow.yml`
+   (готовый файл лежит в папке-примере, потому что у токена автоматической заливки нет права `workflow` — GitHub так защищает Actions).
 2. В настройках репозитория: **Settings → Secrets and variables → Actions** добавьте:
    - `CLOUDFLARE_API_TOKEN` — токен Cloudflare с правами **Account → Cloudflare Pages → Edit**;
    - `CLOUDFLARE_ACCOUNT_ID` — ID аккаунта (виден на главной странице дашборда Cloudflare справа).
