@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kosvip369-pixel.github.io/kolobok-site/sitemap.xml
