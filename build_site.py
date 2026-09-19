@@ -18,7 +18,10 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 # Домен сайта — используется в canonical, robots.txt и sitemap.xml.
 # Задаётся при сборке:  SITE_DOMAIN=https://kolobok-udomlya.ru python3 build_site.py
 DOMAIN = os.environ.get('SITE_DOMAIN', 'https://kolobok-udomlya.pages.dev').rstrip('/')
-B = os.path.join(ROOT, 'build')
+# исходники лежат в 'src' (папка 'build' не попадает в резервные копии workspace)
+B = os.path.join(ROOT, 'src')
+if not os.path.isdir(B):
+    B = os.path.join(ROOT, 'build')
 SITE = os.path.join(ROOT, 'site')
 BUNDLE = os.path.join(ROOT, 'kolobok-udomlya.html')
 ZIP = os.path.join(ROOT, 'kolobok-site.zip')

@@ -620,6 +620,12 @@ footer{background:#0B0806;color:#C9B9AE;padding:70px 0 130px;border-top:1px soli
   .send-actions .btn{width:100%}
 }
 
+/* ---------- ПЛЯШКА ПРО ОПЛАТУ (пока ЮKassa не подключена) ---------- */
+.pay-note{
+  margin-top:16px;padding:13px 15px;border-radius:14px;font-size:13.5px;line-height:1.55;
+  background:#FFF4E3;border:1px dashed rgba(255,122,24,.45);color:#8A5A22
+}
+
 /* ==========================================================================
    ГИМН КАФЕ «КОЛОБОК» — плеер, клик по Колобку, мини-бар
    Подключается отдельным файлом, не конфликтует с site.css
@@ -930,7 +936,7 @@ body.song-on .song-cta button{animation:ctaPulse 1.6s ease-in-out infinite}
     <div class="sec-head reveal">
       <span class="eyebrow">Как заказать</span>
       <h2>От корзины до вашей двери — 4 шага</h2>
-      <p>Заказ приходит администратору сообщением на <b style="color:#FFB020">+7 (900) 473-20-35</b> — мы сразу перезваниваем и подтверждаем.</p>
+      <p>Заказ уходит администратору сообщением в WhatsApp или SMS — останется подтвердить отправку одной кнопкой. <b style="color:#FFB020">+7 (900) 473-20-35</b> — мы сразу перезваниваем и подтверждаем.</p>
     </div>
     <div class="steps">
       <div class="step reveal"><div class="step-n">01</div><h3>Собираете заказ</h3><p>В меню: размер, острота, добавки и пожелание к блюду. Или соберите свою шаурму.</p></div>
@@ -1056,7 +1062,7 @@ body.song-on .song-cta button{animation:ctaPulse 1.6s ease-in-out infinite}
   <div class="wrap">
     <div class="crumbs"><a href="#/">Главная</a> <span>/</span> <b>Доставка и оплата</b></div>
     <h1>Доставка и оплата</h1>
-    <p>Работаем по всему городу Удомля. Заказ приходит администратору сообщением на <b>+7 (900) 473-20-35</b> —
+    <p>Работаем по всему городу Удомля. Заказ уходит администратору сообщением в WhatsApp или SMS на <b>+7 (900) 473-20-35</b> —
        мы перезваниваем, подтверждаем состав и время.</p>
     <div class="page-hero-actions">
       <a href="#/menu" class="btn btn-primary">Перейти в меню</a>
@@ -1075,7 +1081,7 @@ body.song-on .song-cta button{animation:ctaPulse 1.6s ease-in-out infinite}
     <div class="steps">
       <div class="step reveal"><div class="step-n">01</div><h3>Выбираете блюда</h3><p>Меню, конструктор своей шаурмы, комбо. В каждой позиции — пожелание к блюду.</p></div>
       <div class="step reveal"><div class="step-n">02</div><h3>Оформляете заказ</h3><p>Имя, телефон, адрес. Мы сразу звоним и подтверждаем состав и время.</p></div>
-      <div class="step reveal"><div class="step-n">03</div><h3>Оплачиваете</h3><p>Картой онлайн, через СБП или наличными курьеру.</p></div>
+      <div class="step reveal"><div class="step-n">03</div><h3>Оплачиваете</h3><p>Наличными или картой при получении, либо переводом по СБП. Онлайн-оплата картой (ЮKassa) появится позже.</p></div>
       <div class="step reveal"><div class="step-n">04</div><h3>Получаете горячим</h3><p>Курьер приезжает за <span data-set="eta">30–45 минут</span> в термосумке.</p></div>
     </div>
 
@@ -1130,8 +1136,8 @@ body.song-on .song-cta button{animation:ctaPulse 1.6s ease-in-out infinite}
       <p>Сейчас оплата работает в демо-режиме (деньги не списываются). Подключение <b>ЮKassa</b> — следующий шаг, место под него в коде уже подготовлено.</p>
     </div>
     <div class="adv">
-      <div class="adv-card reveal"><div class="adv-ico">💳</div><h3>Картой онлайн</h3><p>Visa, Mastercard, МИР. Чек приходит на телефон. <span style="color:var(--orange-d);font-weight:600">Скоро: ЮKassa</span></p></div>
-      <div class="adv-card reveal"><div class="adv-ico">📱</div><h3>СБП по QR-коду</h3><p>Через приложение банка — без карты под рукой.</p></div>
+      <div class="adv-card reveal"><div class="adv-ico">💳</div><h3>Картой онлайн</h3><p>Visa, Mastercard, МИР. Чек приходит на телефон. <span style="color:var(--orange-d);font-weight:600">ЮKassa — в процессе подключения</span></p></div>
+      <div class="adv-card reveal"><div class="adv-ico">📱</div><h3>Перевод по СБП</h3><p>Через приложение банка — без карты под рукой.</p></div>
       <div class="adv-card reveal"><div class="adv-ico">💵</div><h3>При получении</h3><p>Наличными или картой курьеру, либо в кафе при самовывозе.</p></div>
       <div class="adv-card reveal"><div class="adv-ico">🧾</div><h3>Для организаций</h3><p>Закрывающие документы на корпоративные заказы. Позвоните — договоримся.</p></div>
     </div>
@@ -1343,13 +1349,13 @@ body.song-on .song-cta button{animation:ctaPulse 1.6s ease-in-out infinite}
           <h4>Как приходит заказ</h4>
           <p>После оформления состав заказа формируется автоматически. Отправьте его нам одним нажатием —
              <b>WhatsApp</b> или <b>SMS</b> на номер <span data-set="phone">+7 (900) 473-20-35</span>, либо просто позвоните.</p>
-          <p class="side-note">Скоро заказы будут уходить автоматически, без лишних кнопок: подключим ЮKassa для оплаты и приём заявок на телефон.</p>
+          <p class="side-note">Заказы уже уходят администратору в WhatsApp или SMS — нужно только нажать кнопку отправки. Полностью автоматический приём заявок (без кнопок) включается через вебхук — см. инструкцию для владельца.</p>
           <a class="btn btn-primary btn-block" href="tel:+79004732035" data-set="phone">Позвонить сейчас</a>
         </div>
 
         <div class="side-card">
           <h4>Оплата</h4>
-          <p style="font-size:14px;color:var(--ink-soft)">Картой онлайн, СБП или при получении. Онлайн-оплата — ЮKassa (подключение в процессе), сейчас работает демо-режим.</p>
+          <p style="font-size:14px;color:var(--ink-soft)">Оплата при получении или переводом по СБП. Онлайн-оплата картой (ЮKassa) — в процессе подключения.</p>
         </div>
       </aside>
     </div>
@@ -2134,31 +2140,33 @@ function renderCheckout() {
         <div class="om-line tot"><span>Итого</span><span>${rub(t.total)}</span></div>
       </div>
       <div class="radio-cards" id="payCards">
-        <label class="rc on" data-pay="card"><span class="rc-dot"></span><span><b>Картой онлайн${PAY.provider === 'yookassa' ? ' · ЮKassa' : ''}</b><span>Безопасная оплата, чек придёт на телефон</span></span><span class="rc-price">💳</span></label>
-        <label class="rc" data-pay="sbp"><span class="rc-dot"></span><span><b>СБП по QR-коду</b><span>Через приложение банка</span></span><span class="rc-price">📱</span></label>
-        <label class="rc" data-pay="cash"><span class="rc-dot"></span><span><b>${mode === 'pickup' ? 'При получении' : 'Курьеру при получении'}</b><span>Наличными или картой</span></span><span class="rc-price">💵</span></label>
+        <label class="rc on" data-pay="cash"><span class="rc-dot"></span><span><b>${mode === 'pickup' ? 'Оплата при получении' : 'Оплата курьеру при получении'}</b><span>Наличными или картой при получении</span></span><span class="rc-price">💵</span></label>
+        <label class="rc" data-pay="sbp"><span class="rc-dot"></span><span><b>Перевод по СБП</b><span>Перевод на телефон ${esc(SETTINGS.phone)} после подтверждения заказа</span></span><span class="rc-price">📱</span></label>
+        ${PAY.provider === 'yookassa' ? `<label class="rc" data-pay="card"><span class="rc-dot"></span><span><b>Картой онлайн · ЮKassa</b><span>Безопасная оплата, чек придёт на телефон</span></span><span class="rc-price">💳</span></label>` : ''}
       </div>
-      <div id="cardFields" style="margin-top:18px">
+      ${PAY.provider === 'yookassa' ? `<div id="cardFields" style="margin-top:18px">
         <div class="field"><label>Номер карты</label><input id="inCard" placeholder="0000 0000 0000 0000" inputmode="numeric" maxlength="19"><div class="msg">Введите 16 цифр</div></div>
         <div class="row-2">
           <div class="field"><label>Срок действия</label><input id="inExp" placeholder="ММ/ГГ" maxlength="5" inputmode="numeric"></div>
           <div class="field"><label>CVC</label><input id="inCvc" placeholder="•••" maxlength="3" inputmode="numeric" type="password"></div>
         </div>
-        <p style="font-size:12.5px;color:#9C8C82">Демо-режим: реальные деньги не списываются. ${PAY.provider === 'yookassa' ? 'ЮKassa подключена.' : 'ЮKassa подключается — тогда оплата станет настоящей, а чек придёт автоматически.'}</p>
-      </div>
+      </div>` : `<div class="pay-note">💡 Оплату картой онлайн пока не подключили (ЮKassa в процессе). Оплатите при получении или переводом по СБП — администратор подтвердит заказ по телефону.</div>`}
       <div style="display:flex;gap:12px;margin-top:22px">
         <button class="btn btn-ghost" id="backStep" style="flex:0 0 auto;border-color:rgba(25,17,16,.2);color:#191110">Назад</button>
-        <button class="btn btn-primary" id="payBtn" style="flex:1">${t.total === 0 ? 'Оформить заказ' : 'Оплатить ' + rub(t.total)}</button>
+        <button class="btn btn-primary" id="payBtn" style="flex:1">${(t.total === 0 || PAY.provider !== 'yookassa') ? 'Подтвердить заказ' : 'Оплатить ' + rub(t.total)}</button>
       </div>`;
     $$('#payCards .rc').forEach(c => c.addEventListener('click', () => {
       $$('#payCards .rc').forEach(x => x.classList.remove('on'));
       c.classList.add('on');
-      $('#cardFields').style.display = (c.dataset.pay === 'cash' || c.dataset.pay === 'sbp') ? 'none' : 'block';
-      $$('#cardFields input').forEach(i => i.disabled = c.dataset.pay !== 'card');
-      $('#payBtn').textContent = c.dataset.pay === 'cash' ? 'Подтвердить заказ'
-        : (c.dataset.pay === 'sbp' ? 'Оформить заказ' : 'Оплатить ' + rub(cartTotals().total));
+      const cf = $('#cardFields');
+      if (cf) {
+        cf.style.display = (c.dataset.pay === 'cash' || c.dataset.pay === 'sbp') ? 'none' : 'block';
+        $$('#cardFields input').forEach(i => i.disabled = c.dataset.pay !== 'card');
+      }
+      $('#payBtn').textContent = (c.dataset.pay === 'card' && PAY.provider === 'yookassa')
+        ? 'Оплатить ' + rub(cartTotals().total) : 'Подтвердить заказ';
     }));
-    maskCard($('#inCard')); maskExp($('#inExp'));
+    if ($('#inCard')) { maskCard($('#inCard')); maskExp($('#inExp')); }
     $('#backStep').addEventListener('click', () => { checkoutStep = 1; renderCheckout(); });
     $('#payBtn').addEventListener('click', submitOrder);
   }
@@ -2232,7 +2240,8 @@ function orderText(o) {
     + `\n${o.mode === 'pickup' ? 'Самовывоз из кафе' : 'Доставка: ' + o.addr + (o.ent ? ', ' + o.ent : '')}`
     + `\nИмя: ${o.name}\nТелефон: ${o.phone}\nКогда: ${o.when}`
     + `${o.note ? '\nКомментарий: ' + o.note : ''}`
-    + `\nОплата: ${({ card:'картой онлайн', sbp:'СБП', cash:'при получении' })[o.pay] || o.pay}`;
+    + `\nОплата: ${({ card: (PAY.provider === 'yookassa' ? 'картой онлайн (ЮKassa)' : 'при получении'), sbp: 'перевод по СБП', cash: 'при получении' })[o.pay] || o.pay}`
+    + (PAY.provider === 'yookassa' ? '' : '\n⚠ Оплата онлайн не подключена — принять оплату при получении');
 }
 function waLink(text) { return `https://wa.me/${SETTINGS.whatsapp}?text=${encodeURIComponent(text)}`; }
 function smsLink(text) { return `sms:+${SETTINGS.phoneRaw}?body=${encodeURIComponent(text)}`; }
@@ -2252,7 +2261,11 @@ function sendOrderToOwner(order) {
 function showSuccess() {
   const o = lastOrder;
   const text = orderText(o);
-  const payNames = { card:'оплачено картой онлайн', sbp:'оплата через СБП', cash:'оплата при получении' };
+  const payNames = {
+    card: PAY.provider === 'yookassa' ? 'оплачено картой онлайн' : 'оплата при получении',
+    sbp: 'перевод по СБП — администратор подтвердит заказ',
+    cash: 'оплата при получении'
+  };
   $('#checkoutBody').innerHTML = `
     <div class="success">
       <div class="ok-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
