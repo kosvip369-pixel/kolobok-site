@@ -76,7 +76,13 @@ def fill_images(html, hero, photos):
 def main():
     parts = split_partials()
     css = read(os.path.join(B, 'fonts.css')) + '\n' + read(os.path.join(B, 'site.css'))
+    song_css_path = os.path.join(B, 'song.css')          # стили плеера «Гимн кафе»
+    if os.path.exists(song_css_path):
+        css += '\n' + read(song_css_path)
     js = read(os.path.join(B, 'site.js'))
+    song_js_path = os.path.join(B, 'song.js')            # плеер песни «Колобок 2.0»
+    song_js = read(song_js_path) if os.path.exists(song_js_path) else ''
+    AUDIO_SRC_DIR = os.path.join(ROOT, 'assets-src', 'audio')
     img_dir = os.path.join(B, 'img')
     imgs = [f for f in sorted(os.listdir(img_dir)) if f.endswith('.jpg')]
 
@@ -89,6 +95,18 @@ def main():
         f.write(css)
     with open(os.path.join(SITE, 'assets/js/site.js'), 'w', encoding='utf-8') as f:
         f.write("window.IMG_BASE = 'assets/img/';\n" + js)
+    if song_js:
+        shutil.copy(song_js_path, os.path.join(SITE, 'assets/js/song.js'))
+    # --- звук песни: колобок-song.mp3 + короткий джингл + обложка ---
+    if os.path.isdir(AUDIO_SRC_DIR):
+        os.makedirs(os.path.join(SITE, 'assets/audio'), exist_ok=True)
+        for f in ('kolobok-song.mp3', 'kolobok-jingle.mp3'):
+            src = os.path.join(AUDIO_SRC_DIR, f)
+            if os.path.exists(src):
+                shutil.copy(src, os.path.join(SITE, 'assets/audio', f))
+        cover = os.path.join(AUDIO_SRC_DIR, 'cover.jpg')
+        if os.path.exists(cover):
+            shutil.copy(cover, os.path.join(SITE, 'assets/img/song-cover.jpg'))
     for f in imgs:
         shutil.copy(os.path.join(img_dir, f), os.path.join(SITE, 'assets/img', f))
 
@@ -108,6 +126,9 @@ def main():
 
 /assets/js/*
   Cache-Control: public, max-age=3600
+
+/assets/audio/*
+  Cache-Control: public, max-age=604800
 ''')
 
     # --- robots.txt ---
@@ -155,7 +176,10 @@ padding:15px 28px;border-radius:999px;font-weight:700;margin:6px} a.ghost{backgr
         html += '\n' + content
         html += '\n' + fill_urls(parts['footer'], URLS_MP, '')
         html += '\n' + parts['overlays']
-        html += '\n<script src="assets/js/site.js"></script>\n<script>document.getElementById("year").textContent=new Date().getFullYear();</script>\n</body>\n</html>\n'
+        html += '\n<script src="assets/js/site.js"></script>'
+        if song_js:
+            html += '\n<script src="assets/js/song.js" defer></script>'
+        html += '\n<script>document.getElementById("year").textContent=new Date().getFullYear();</script>\n</body>\n</html>\n'
         with open(os.path.join(SITE, p['slug'] + '.html'), 'w', encoding='utf-8') as f:
             f.write(html)
 
@@ -181,6 +205,21 @@ padding:15px 28px;border-radius:999px;font-weight:700;margin:6px} a.ghost{backgr
             + f'\n<script>window.IMG={json.dumps(imgs_data, ensure_ascii=False)};window.__BUNDLE__=true;</script>'
             + '\n<script>\n' + js + '\n</script>'
             + '\n<script>document.getElementById("year").textContent=new Date().getFullYear();</script>\n</body>\n</html>\n')
+    # --- звук и обложка прямо в HTML (однофайловая версия работает офлайн) ---
+    audio_uri = cover_uri = ''
+    bundle_audio = os.path.join(AUDIO_SRC_DIR, 'song-bundle.mp3')
+    if os.path.exists(bundle_audio):
+        audio_uri = 'data:audio/mpeg;base64,' + base64.b64encode(open(bundle_audio, 'rb').read()).decode()
+    bundle_cover = os.path.join(AUDIO_SRC_DIR, 'cover.jpg')
+    if os.path.exists(bundle_cover):
+        cover_uri = 'data:image/jpeg;base64,' + base64.b64encode(open(bundle_cover, 'rb').read()).decode()
+    extra = ''
+    if audio_uri or cover_uri:
+        extra += ('\n<script>window.AUDIO_SRC="' + audio_uri + '";window.SONG_COVER="' + cover_uri + '";</script>')
+    if song_js:
+        extra += '\n<script>\n' + song_js + '\n</script>'
+    if extra:
+        html = html.replace('\n<script>document.getElementById("year")', extra + '\n<script>document.getElementById("year")')
     assert '{{' not in html, re.findall(r'\{\{[^}]*\}\}', html)[:5]
     with open(BUNDLE, 'w', encoding='utf-8') as f:
         f.write(html)
@@ -194,6 +233,8 @@ padding:15px 28px;border-radius:999px;font-weight:700;margin:6px} a.ghost{backgr
 
     print('Готово:')
     print('  site/ —', len(PAGES), 'страниц,', len(imgs), 'изображений')
+    if os.path.isdir(os.path.join(SITE, 'assets/audio')):
+        print('  assets/audio/ —', ', '.join(sorted(os.listdir(os.path.join(SITE, 'assets/audio')))))
     print('  kolobok-udomlya.html —', round(os.path.getsize(BUNDLE) / 1048576, 2), 'МБ')
     print('  kolobok-site.zip —', round(os.path.getsize(ZIP) / 1048576, 2), 'МБ')
 
